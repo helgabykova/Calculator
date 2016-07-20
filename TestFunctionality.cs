@@ -8,9 +8,6 @@ namespace TestCalculator
     [TestFixture]
     public class TestFunctionality
     {
-        double a;
-        double b;
-        string sign;
 
         [Test]
         public void SumCheck()

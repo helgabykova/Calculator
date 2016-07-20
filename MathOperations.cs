@@ -36,20 +36,15 @@ namespace Calculator
             {
                 case "+":
                     return Sign.Plus;
-                    break;
                 case "-":
                     return Sign.Minus;
-                    break;
                 case "*":
                     return Sign.Multi;
-                    break;
                 case "/":
                     return Sign.Div;
-                    break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
-                    break;
 
             }
         }
