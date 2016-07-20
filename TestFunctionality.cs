@@ -12,8 +12,7 @@ namespace TestCalculator
         [Test]
         public void SumCheck()
         {
-
-            ReaderAndOutput r = new ReaderAndOutput(2,48);
+            ReaderAndOutput r = new ReaderAndOutput(2, 48);
             Assert.AreEqual(50, MathOperations.Sum(r));
         }
 
@@ -36,16 +35,21 @@ namespace TestCalculator
         [Test]
         public void DivCheckNegative()
         {
-
-            ReaderAndOutput r = new ReaderAndOutput(20,5);
+            ReaderAndOutput r = new ReaderAndOutput(20, 5);
             Assert.AreNotEqual(5, MathOperations.Multi(r));
         }
 
         [Test]
-        public void ConvertStringToEnumCheck()
+        public void ConvertStringToEnumCheck1Plus()
         {
             Assert.AreEqual(Sign.Plus, MathOperations.ConvertStringToEnum("+"));
-        } 
+        }
+
+        [Test]
+        public void ConvertStringToEnumCheckMinus()
+        {
+            Assert.AreNotEqual(Sign.Multi, MathOperations.ConvertStringToEnum("-"));
+        }
     }
 }
 
