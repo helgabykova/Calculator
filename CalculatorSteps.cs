@@ -13,74 +13,58 @@ namespace Calculator
         double a;
         double b;
 
-        //First number entering
-        [Given(@"I have entered (.*) into the calculator")]
-        public void GivenIHaveEnteredIntoTheCalculator(string number)
+        [Given(@"I have written (.*) and (.*)")]
+        public void GivenIHavePlusAnd(string anumber, string bnumber)
         {
-            a = Convert.ToDouble(number);
+            a = Convert.ToDouble(anumber);
+            b = Convert.ToDouble(bnumber);
         }
 
-        //Second number entering
-        [Given(@"I entered (.*) into the calculator")]
-        public void WhenIEnteredIntoTheCalculator(string number)
-        {
-            b = Convert.ToDouble(number);
-        }
 
-        //Plus function
-        [When(@"I have entered \+")]
-        public void WhenIHaveEntered()
+        //Funtions
+        [When(@"I have entered '(.*)'")]
+        public void WhenIHaveEntered(string sign)
         {
             r = new ReaderAndOutput(a, b);
-            result = MathOperations.Sum(r);
-        }
-    
-        [Then(@"the Sum result should be (.*) on the screen")]
-        public void ThenTheSumResultShouldBeOnTheScreen(string getresult)
-        {
-            Assert.AreEqual(result, Convert.ToDouble(getresult));
-        }
-
-        //Multi function
-        [When(@"I have entered \*")]
-        public void GivenIHaveEnteredMultiSign()
-        {
-            r = new ReaderAndOutput(a, b);
-            result = MathOperations.Multi(r);
-        }
-
-        [Then(@"the Multi result should be (.*) on the screen")]
-        public void ThenTheMultiResultShouldBeOnTheScreen(string getresult)
-        {
-            Assert.AreEqual(result, Convert.ToDouble(getresult));
+            if (sign == "+")
+            {
+                result = MathOperations.Sum(r);
+            }
+            else if (sign == "-")
+            {
+                result = MathOperations.Minus(r);
+            }
+            else if (sign == "*")
+            {
+                result = MathOperations.Multi(r);
+            }
+            else if (sign == "/")
+            {
+                result = MathOperations.Div(r);
+            }
         }
 
-        //Div function
-        [When(@"I have entered \/")]
-        public void GivenIHaveEnteredDivSign()
+        [Then(@"the result should be (.*) on the screen")]
+        public void ThenTheResultShouldBeOnTheScreen(string Expresult, string sign)
         {
-            r = new ReaderAndOutput(a, b);
-            result = MathOperations.Div(r);
+            if (sign == "+")
+            {
+                Assert.AreEqual(Expresult, MathOperations.Sum(r));
+            }
+            if (sign == "-")
+            {
+                Assert.AreEqual(Expresult, MathOperations.Minus(r));
+            }
+            if (sign == "*")
+            {
+                Assert.AreEqual(Expresult, MathOperations.Multi(r));
+            }
+            if (sign == "/")
+            {
+                Assert.AreEqual(Expresult, MathOperations.Div(r));
+            }
         }
 
-        [Then(@"the Div result should be (.*) on the screen")]
-        public void ThenTheDivResultShouldBeOnTheScreen(string getresult)
-        {
-            Assert.AreEqual(result, Convert.ToDouble(getresult));
-        }
-
-        //Minus function
-        [When(@"I have entered \-")]
-        public void GivenIHaveEnteredMinusSign()
-        {
-            r = new ReaderAndOutput(a, b);
-            result = MathOperations.Minus(r);
-        }
-        [Then(@"the Minus result should be (.*) on the screen")]
-        public void ThenTheMinusResultShouldBeOnTheScreen(string getresult)
-        {
-            Assert.AreEqual(result, Convert.ToDouble(getresult));
-        }
 
 
     }
