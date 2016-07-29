@@ -12,60 +12,57 @@ namespace Calculator
         double result;
         double a;
         double b;
+        string Expresult;
 
-        [Given(@"I have written (.*) and (.*)")]
-        public void GivenIHavePlusAnd(string anumber, string bnumber)
+        [Given(@"I have written <(.*)> and <(.*)>")]
+        public void GivenIHaveWritten(string anumber, string bnumber)
         {
-            a = Convert.ToDouble(anumber);
-            b = Convert.ToDouble(bnumber);
+                a = Convert.ToDouble(anumber);
+                b = Convert.ToDouble(bnumber);
         }
-
 
         //Funtions
         [When(@"I have entered '(.*)'")]
         public void WhenIHaveEntered(string sign)
         {
-            r = new ReaderAndOutput(a, b);
-            if (sign == "+")
-            {
-                result = MathOperations.Sum(r);
-            }
-            else if (sign == "-")
-            {
-                result = MathOperations.Minus(r);
-            }
-            else if (sign == "*")
-            {
-                result = MathOperations.Multi(r);
-            }
-            else if (sign == "/")
-            {
-                result = MathOperations.Div(r);
-            }
+                r = new ReaderAndOutput(a, b);
+                if (sign == "+")
+                {
+                    result = MathOperations.Sum(r);
+                }
+                else if (sign == "-")
+                {
+                    result = MathOperations.Minus(r);
+                }
+                else if (sign == "*")
+                {
+                    result = MathOperations.Multi(r);
+                }
+                else if (sign == "/")
+                {
+                    result = MathOperations.Div(r);
+                }
         }
 
         [Then(@"the result should be (.*) on the screen")]
-        public void ThenTheResultShouldBeOnTheScreen(string Expresult, string sign)
+        public void ThenTheResultShouldBeOnTheScreen(string sign)
         {
             if (sign == "+")
             {
                 Assert.AreEqual(Expresult, MathOperations.Sum(r));
             }
-            if (sign == "-")
+            else if (sign == "-")
             {
                 Assert.AreEqual(Expresult, MathOperations.Minus(r));
             }
-            if (sign == "*")
+            else if (sign == "*")
             {
                 Assert.AreEqual(Expresult, MathOperations.Multi(r));
             }
-            if (sign == "/")
+            else if (sign == "/")
             {
                 Assert.AreEqual(Expresult, MathOperations.Div(r));
             }
+            }
         }
-
-
-
     }
-}
