@@ -17,14 +17,22 @@ namespace Calculator
         [Given(@"I have written <(.*)> and <(.*)>")]
         public void GivenIHaveWritten(string anumber, string bnumber)
         {
+            try
+            {
                 a = Convert.ToDouble(anumber);
                 b = Convert.ToDouble(bnumber);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         //Funtions
         [When(@"I have entered '(.*)'")]
         public void WhenIHaveEntered(string sign)
         {
+            
                 r = new ReaderAndOutput(a, b);
                 if (sign == "+")
                 {
@@ -62,6 +70,10 @@ namespace Calculator
             else if (sign == "/")
             {
                 Assert.AreEqual(Expresult, MathOperations.Div(r));
+            }
+            else
+            {
+                FormatException ex;
             }
             }
         }

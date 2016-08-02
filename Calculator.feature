@@ -27,3 +27,7 @@ Scenario: Plus two numbers
 	When I have entered '+'
 	Then the result should be <10> on the screen
 
+Scenario: Check words
+	Given I have written <word> and <word>
+	Then the result should be <Exception> on the screen
+
